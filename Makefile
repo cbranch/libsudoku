@@ -60,7 +60,7 @@ clean:
 
 watch:
 ifeq ($(OS),Darwin)
-	while ! fswatch -r . ; do make; done
+	fswatch -0 -o -r --include \.cpp$$ --include \.h$$ --exclude $$ . | xargs -0 -n1 -I{} make
 endif
 ifeq ($(OS),Linux)
 	while ! inotifywait -r -e modify .; do make; done
